@@ -36,11 +36,10 @@ this script in a loop to iteratively tune parameters
 ...
 """
 import json
-from math import exp
-from uuid import uuid4
-
 from keras.models import save_model
+from math import exp
 from prettyparse import Usage
+from uuid import uuid4
 
 from precise.annoyance_estimator import AnnoyanceEstimator
 from precise.model import ModelParams, create_model
@@ -59,6 +58,7 @@ class TrainOptimizeScript(TrainScript):
         args.model = args.trials_name + '-cur'
         save_params(args.model)
         super().__init__(args)
+        from bbopt import BlackBoxOptimizer
         self.bb = BlackBoxOptimizer(file=self.args.trials_name)
 
     def calc_params_cost(self, model):
