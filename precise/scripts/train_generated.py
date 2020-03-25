@@ -92,7 +92,7 @@ class TrainGeneratedScript(BaseScript):
         self.model = create_model(args.model, params)
         self.listener = Listener('', args.chunk_size, runner_cls=lambda x: None)
 
-        from keras.callbacks import ModelCheckpoint, TensorBoard
+        from keras.callbacks import ModelCheckpoint
         checkpoint = ModelCheckpoint(args.model, monitor=args.metric_monitor,
                                      save_best_only=args.save_best)
         epoch_fiti = Fitipy(splitext(args.model)[0] + '.epoch')
@@ -105,9 +105,8 @@ class TrainGeneratedScript(BaseScript):
         self.model_base = splitext(self.args.model)[0]
 
         self.callbacks = [
-            checkpoint, TensorBoard(
-                log_dir=self.model_base + '.logs',
-            ), LambdaCallback(on_epoch_end=on_epoch_end)
+            checkpoint,
+            LambdaCallback(on_epoch_end=on_epoch_end)
         ]
 
         self.data = TrainData.from_both(args.tags_file, args.tags_folder, args.folder)
@@ -236,7 +235,7 @@ class TrainGeneratedScript(BaseScript):
                 callbacks=self.callbacks, initial_epoch=self.epoch
             )
         finally:
-            self.model.save(self.args.model)
+            self.model.save(self.args.model, save_format='h5')
             save_params(self.args.model)
 
 
