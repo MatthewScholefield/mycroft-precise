@@ -70,7 +70,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'numpy==1.16',
-        'tensorflow-gpu==2.2.0',
+        'tensorflow==2.*',
         'sonopy',
         'pyaudio',
         'h5py',
