@@ -10,6 +10,8 @@ __pycache__/
 /logs
 *.egg-info/
 /.pytest_cache/
+not-wake-word/*
+hey-hakan*
 
 *.pyc
 *.pb
@@ -18,7 +20,7 @@ __pycache__/
 *.json
 *.pbtxt
 *.txt
-*.wav
+# *.wav
 
 # Data folders
 /*/wake-word/
